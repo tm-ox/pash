@@ -21,6 +21,12 @@ defmodule PashWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    # Blog
+    live "/posts", PostLive.Index, :index
+    live "/posts/new", PostLive.Index, :new
+    live "/posts/:id/edit", PostLive.Index, :edit
+    live "/posts/:id", PostLive.Show, :show
+    live "/posts/:id/show/edit", PostLive.Show, :edit
   end
 
   import AshAdmin.Router
@@ -28,7 +34,7 @@ defmodule PashWeb.Router do
   # AshAdmin requires a Phoenix LiveView `:browser` pipeline
   # If you DO NOT have a `:browser` pipeline already, then AshAdmin has a `:browser` pipeline
   # Most applications will not need this:
-  admin_browser_pipeline(:browser)
+  # admin_browser_pipeline(:browser)
 
   # NOTE: `scope/2` here does not have a second argument.
   # If it looks like `scope "/", MyAppWeb`, create a *new* scope, don't copy the contents into your scope
