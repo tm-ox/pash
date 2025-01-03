@@ -1,13 +1,46 @@
 defmodule Pash.Support.Ticket do
   # This turns this module into a resource
-  use Ash.Resource, domain: Pash.Support
+  use Ash.Resource,
+    domain: Pash.Support,
+    data_layer: AshSqlite.DataLayer
+
+  sqlite do
+    table "tickets"
+    repo Pash.Repo
+  end
+
+  code_interface do
+    # the action open can be omitted because it matches the functon name
+    define :open, args: [:subject]
+  end
 
   actions do
     # Use the default implementation of the :read action
     defaults [:read]
 
     # and a create action, which we'll customize later
-    create :create
+    create :open do
+      accept [:subject]
+    end
+
+    update :close do
+      # We don't want to accept any input here
+      accept []
+
+      validate attribute_does_not_equal(:status, :closed) do
+        message "Ticket is already closed"
+      end
+
+      change set_attribute(:status, :closed)
+      # A custom change could be added like so:
+      #
+      # change MyCustomChange
+      # change {MyCustomChange, opt: :val}
+    end
+
+    update :assign do
+      accept [:representative_id]
+    end
   end
 
   # Attributes are the simple pieces of data that exist on your resource
@@ -16,6 +49,36 @@ defmodule Pash.Support.Ticket do
     uuid_primary_key :id
 
     # Add a string type attribute called `:subject`
-    attribute :subject, :string
+    attribute :subject, :string do
+      # Don't allow `nil` values
+      allow_nil? false
+
+      # Allow this attribute to be public. By default, all attributes are private.
+      public? true
+    end
+
+    # status is either `open` or `closed`. We can add more statuses later
+    attribute :status, :atom do
+      # Constraints allow you to provide extra rules for the value.
+      # The available constraints depend on the type
+      # See the documentation for each type to know what constraints are available
+      # Since atoms are generally only used when we know all of the values
+      # it provides a `one_of` constraint, that only allows those values
+      constraints one_of: [:open, :closed]
+
+      # The status defaulting to open makes sense
+      default :open
+
+      # We also don't want status to ever be `nil`
+      allow_nil? false
+    end
+  end
+
+  relationships do
+    # belongs_to means that the destination attribute is unique, meaning only one related record could exist.
+    # We assume that the destination attribute is `representative_id` based
+    # on the name of this relationship and that the source attribute is `representative_id`.
+    # We create `representative_id` automatically.
+    belongs_to :representative, Pash.Support.Representative
   end
 end

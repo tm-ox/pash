@@ -7,8 +7,6 @@
 # General application configuration
 import Config
 
-import Config
-
 config :pash, :ash_domains, [Pash.Support]
 
 config :pash,

@@ -35,6 +35,7 @@ defmodule Pash.MixProject do
     [
       {:ash_phoenix, "~> 2.0"},
       {:ash, "~> 3.0"},
+      {:ash_admin, "~> 0.11.4"},
       {:ash_sqlite, "~> 0.2.1"},
       {:ecto_sql, "~> 3.10"},
       {:ecto_sqlite3, ">= 0.0.0"},
