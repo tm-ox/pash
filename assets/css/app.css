@@ -1,5 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Roboto+Slab:wght@100..900&display=swap");
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+@layer base {
+    :root {
+        --text: #080304;
+        --background: #fdf6f7;
+        --primary: #dc2852;
+        --secondary: #eb7a94;
+        --accent: #f25277;
+    }
+    .dark {
+        --text: #fcf8f9;
+        --background: #080203;
+        --primary: #d7234d;
+        --secondary: #85142e;
+        --accent: #ab0d32;
+    }
+    body {
+        @apply bg-background font-brand text-text tracking-wide;
+    }
+    header {
+        @apply fixed top-0 flex w-full h-fit site-padding;
+    }
+    nav {
+        @apply border-b border-primary;
+    }
+    main {
+        @apply flex flex-col flex-grow mt-24 site-padding;
+    }
+    h1 {
+        @apply text-3xl sm:text-4xl font-bold text-primary tracking-wide;
+    }
+    h4 {
+        @apply text-lg font-bold;
+    }
+    h5 {
+        @apply text-sm font-medium;
+    }
+    thead,
+    dt {
+        @apply !font-bold !text-accent;
+    }
+    td,
+    dl,
+    dd {
+        @apply !text-primary;
+    }
+}
+@layer utilities {
+    .site-padding {
+        @apply px-4 lg:px-12;
+    }
+    .content-width {
+        @apply w-full max-w-screen-lg mx-auto px-3;
+    }
+}

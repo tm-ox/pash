@@ -4,28 +4,29 @@ defmodule PashWeb.PostLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <.header>
-      Listing Posts
-      <:actions>
-        <.link patch={~p"/posts/new"}>
-          <.button>New Post</.button>
-        </.link>
-      </:actions>
-    </.header>
+    <%!-- <.header>
+      Listing blog
+      <:actions> --%>
+    <.link patch={~p"/blog/new"}>
+      <.button>New Post</.button>
+    </.link>
+    <%!-- </:actions>
+    </.header> --%>
 
     <.table
-      id="posts"
-      rows={@streams.posts}
-      row_click={fn {_id, post} -> JS.navigate(~p"/posts/#{post}") end}
+      id="blog"
+      rows={@streams.blog}
+      row_click={fn {_id, post} -> JS.navigate(~p"/blog/#{post}") end}
     >
       <:col :let={{_id, post}} label="Id">{post.id}</:col>
+      <:col :let={{_id, post}} label="Content">{post.content}</:col>
 
       <:action :let={{_id, post}}>
         <div class="sr-only">
-          <.link navigate={~p"/posts/#{post}"}>Show</.link>
+          <.link navigate={~p"/blog/#{post}"}>Show</.link>
         </div>
 
-        <.link patch={~p"/posts/#{post}/edit"}>Edit</.link>
+        <.link patch={~p"/blog/#{post}/edit"}>Edit</.link>
       </:action>
 
       <:action :let={{id, post}}>
@@ -38,14 +39,14 @@ defmodule PashWeb.PostLive.Index do
       </:action>
     </.table>
 
-    <.modal :if={@live_action in [:new, :edit]} id="post-modal" show on_cancel={JS.patch(~p"/posts")}>
+    <.modal :if={@live_action in [:new, :edit]} id="post-modal" show on_cancel={JS.patch(~p"/blog")}>
       <.live_component
         module={PashWeb.PostLive.FormComponent}
         id={(@post && @post.id) || :new}
         title={@page_title}
         action={@live_action}
         post={@post}
-        patch={~p"/posts"}
+        patch={~p"/blog"}
       />
     </.modal>
     """
@@ -53,7 +54,7 @@ defmodule PashWeb.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :posts, Ash.read!(Pash.Blog.Post))}
+    {:ok, stream(socket, :blog, Ash.read!(Pash.Blog.Post))}
   end
 
   @impl true
@@ -75,13 +76,13 @@ defmodule PashWeb.PostLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Posts")
+    |> assign(:page_title, "Listing blog")
     |> assign(:post, nil)
   end
 
   @impl true
   def handle_info({PashWeb.PostLive.FormComponent, {:saved, post}}, socket) do
-    {:noreply, stream_insert(socket, :posts, post)}
+    {:noreply, stream_insert(socket, :blog, post)}
   end
 
   @impl true
@@ -89,6 +90,6 @@ defmodule PashWeb.PostLive.Index do
     post = Ash.get!(Pash.Blog.Post, id)
     Ash.destroy!(post)
 
-    {:noreply, stream_delete(socket, :posts, post)}
+    {:noreply, stream_delete(socket, :blog, post)}
   end
 end
