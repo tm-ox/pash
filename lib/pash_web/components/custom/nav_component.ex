@@ -6,17 +6,17 @@ defmodule PashWeb.NavComponent do
   use PashWeb, :verified_routes
 
   import PashWeb.CoreComponents, only: [icon: 1]
-  alias PashWeb.Components
   alias Phoenix.LiveView.JS
 
   attr :id, :string, default: "navbar"
   attr :tabs, :list, required: true
   attr :active_tab, :atom, required: true
+  slot :brand_block, doc: "brand"
 
   def navbar(assigns) do
     ~H"""
     <nav class="flex items-center py-4 w-full h-fit">
-      <Components.logo id="logo" />
+      {render_slot(@brand_block)}
       <.link
         class="flex gap-2 items-center ml-auto text-primary hover:text-accent"
         phx-click={show_navbar(@id)}
@@ -40,7 +40,7 @@ defmodule PashWeb.NavComponent do
           <.close_button id={@id} click={hide_navbar(@id)} />
         </div>
         <div class="absolute top-4 right-4 lg:right-0 flex items-center">
-          <Components.theme id="theme" />
+          <.theme id="theme" />
         </div>
         <aside
           id={@id}
@@ -56,6 +56,7 @@ defmodule PashWeb.NavComponent do
   attr :id, :string, default: "sidebar"
   attr :tabs, :list, required: true
   attr :active_tab, :atom, required: true
+  slot :brand_block, doc: "brand"
 
   def sidebar(assigns) do
     ~H"""
@@ -63,7 +64,7 @@ defmodule PashWeb.NavComponent do
       <.link class="mr-4" phx-click={show_sidebar(@id)}>
         <.icon name="hero-bars-3" class="w-6 h-6 text-primary hover:text-accent" />
       </.link>
-      <Components.logo id="logo" />
+      {render_slot(@brand_block)}
     </header>
     <div
       id={"#{@id}-bg"}
@@ -81,11 +82,11 @@ defmodule PashWeb.NavComponent do
             <.close_button id={@id} click={hide_sidebar(@id)} />
           </div>
           <div class="flex gap-4 justify-between px-3 py-4 border-b border-primary">
-            <Components.logo id="logo" />
+            {render_slot(@brand_block)}
           </div>
           <.sidebar_nav active_tab={@active_tab} tabs={@tabs} />
           <div class="flex flex-grow w-full py-4 bg-background border-b border-primary justify-center">
-            <Components.theme id="theme" />
+            <.theme id="theme" />
           </div>
         </aside>
       </div>
@@ -107,6 +108,25 @@ defmodule PashWeb.NavComponent do
     >
       <.icon name="hero-x-mark-solid" class="w-6 h-6" />
     </button>
+    """
+  end
+
+  defp theme(assigns) do
+    ~H"""
+    <div>
+      <button
+        phx-click={JS.dispatch("toogle-theme")}
+        class="theme-button text-primary hover:text-accent mt-1"
+        aria-label="Toggle theme"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20">
+          <path
+            fill="currentColor"
+            d="M10 3.5a6.5 6.5 0 1 1 0 13zM10 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16"
+          />
+        </svg>
+      </button>
+    </div>
     """
   end
 

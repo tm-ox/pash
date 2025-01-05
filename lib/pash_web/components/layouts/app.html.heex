@@ -1,6 +1,10 @@
 <div class="flex flex-col min-h-screen">
   <header class="fixed top-0 flex w-full h-fit">
-    <PashWeb.NavComponent.navbar active_tab={@active_tab} tabs={@tabs} />
+    <PashWeb.NavComponent.navbar active_tab={@active_tab} tabs={@tabs}>
+      <:brand_block>
+        <PashWeb.Custom.BrandComponent.brand />
+      </:brand_block>
+    </PashWeb.NavComponent.navbar>
   </header>
   <main>
     <.flash_group flash={@flash} />
