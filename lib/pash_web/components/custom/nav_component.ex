@@ -3,7 +3,6 @@ defmodule PashWeb.NavComponent do
 
   use Phoenix.Component
   use Gettext, backend: PashWeb.Gettext
-  use PashWeb, :verified_routes
 
   import PashWeb.CoreComponents, only: [icon: 1]
   alias Phoenix.LiveView.JS
@@ -18,10 +17,10 @@ defmodule PashWeb.NavComponent do
     <nav class="flex items-center py-4 w-full h-fit">
       {render_slot(@brand_block)}
       <.link
-        class="flex gap-2 items-center ml-auto text-primary hover:text-accent"
+        class="flex gap-2 items-center ml-auto text-accent hover:text-primary"
         phx-click={show_navbar(@id)}
       >
-        <h5 class="text-accent">Menu</h5>
+        <h5>Menu</h5>
         <.icon name="hero-bars-3" class="w-6 h-6" />
       </.link>
     </nav>

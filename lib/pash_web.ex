@@ -17,6 +17,10 @@ defmodule PashWeb do
   those modules here.
   """
 
+  # When generating HTML:
+  # mix phx.gen.html Context Resource --components OriginalCoreComponents
+  alias Phoenix.LiveView.CoreComponents, as: OriginalCoreComponents
+
   def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
 
   def router do
@@ -86,7 +90,15 @@ defmodule PashWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import PashWeb.CoreComponents
+      import PashWeb.CoreComponents,
+        except: [table: 1, button: 1, header: 1, modal: 1, list: 1, back: 1]
+
+      import PashWeb.Custom.TableComponent
+      import PashWeb.Custom.HeaderComponent
+      import PashWeb.Custom.ButtonComponent
+      import PashWeb.Custom.ModalComponent
+      import PashWeb.Custom.ListComponent
+      import PashWeb.Custom.BackComponent
 
       use Gettext,
         backend: PashWeb.Gettext

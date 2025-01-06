@@ -4,14 +4,14 @@ defmodule PashWeb.PostLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <%!-- <.header>
+    <.header>
       Listing blog
-      <:actions> --%>
-    <.link patch={~p"/blog/new"}>
-      <.button>New Post</.button>
-    </.link>
-    <%!-- </:actions>
-    </.header> --%>
+      <:actions>
+        <.link patch={~p"/blog/new"}>
+          <.button>New Post</.button>
+        </.link>
+      </:actions>
+    </.header>
 
     <.table
       id="blog"
@@ -39,7 +39,12 @@ defmodule PashWeb.PostLive.Index do
       </:action>
     </.table>
 
-    <.modal :if={@live_action in [:new, :edit]} id="post-modal" show on_cancel={JS.patch(~p"/blog")}>
+    <.modal
+      :if={@live_action in [:new, :edit]}
+      id="post-modal"
+      modal_show
+      on_cancel={JS.patch(~p"/blog")}
+    >
       <.live_component
         module={PashWeb.PostLive.FormComponent}
         id={(@post && @post.id) || :new}

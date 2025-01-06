@@ -4,16 +4,16 @@ defmodule PashWeb.PostLive.Show do
   @impl true
   def render(assigns) do
     ~H"""
-    <%!-- <.header>
+    <.header>
       Post {@post.id}
       <:subtitle>This is a post record from your database.</:subtitle>
 
-      <:actions> --%>
-    <.link patch={~p"/blog/#{@post}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit post</.button>
-    </.link>
-    <%!-- </:actions>
-    </.header> --%>
+      <:actions>
+        <.link patch={~p"/blog/#{@post}/show/edit"} phx-click={JS.push_focus()}>
+          <.button>Edit post</.button>
+        </.link>
+      </:actions>
+    </.header>
 
     <.list>
       <:item title="Id">{@post.id}</:item>
@@ -22,7 +22,12 @@ defmodule PashWeb.PostLive.Show do
 
     <.back navigate={~p"/blog"}>Back to posts</.back>
 
-    <.modal :if={@live_action == :edit} id="post-modal" show on_cancel={JS.patch(~p"/blog/#{@post}")}>
+    <.modal
+      :if={@live_action == :edit}
+      id="post-modal"
+      modal_show
+      on_cancel={JS.patch(~p"/blog/#{@post}")}
+    >
       <.live_component
         module={PashWeb.PostLive.FormComponent}
         id={@post.id}

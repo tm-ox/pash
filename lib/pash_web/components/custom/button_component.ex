@@ -1,31 +1,37 @@
 defmodule PashWeb.Custom.ButtonComponent do
   use Phoenix.Component
-  use Gettext, backend: PashWeb.Gettext
-  use PashWeb, :verified_routes
-
   # alias Phoenix.LiveView.JS
 
-  attr(:label, :string, required: true, doc: "Button label")
+  use Gettext,
+    backend: PashWeb.Gettext
 
-  attr(:color, :atom,
-    default: :default,
-    values: ~w(default)a,
-    doc: "Button color"
-  )
+  @doc """
+  Renders a button.
 
-  def btn(assigns) do
+  ## Examples
+
+      <.button>Send!</.button>
+      <.button phx-click="go" class="ml-2">Send!</.button>
+  """
+  attr :type, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global, include: ~w(disabled form name value)
+
+  slot :inner_block, required: true
+
+  def button(assigns) do
     ~H"""
-    <button class={[
-      color(@color),
-      "inline-flex items-center px-2.5 py-1.5 w-fit",
-      "text-xs font-medium",
-      "border border-transparent rounded shadow-sm",
-      "focus:outline-none focus:ring-2 focus:ring-offset-2"
-    ]}>
-      {@label}
+    <button
+      type={@type}
+      class={[
+        "phx-submit-loading:opacity-75 rounded bg-primary hover:bg-accent py-1 px-3",
+        "text-sm font-semibold leading-6 text-primarycontent active:text-primarycontent/80",
+        @class
+      ]}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
     </button>
     """
   end
-
-  defp color(:default), do: "bg-primary hover:bg-accent text-text focus:ring-accent"
 end

@@ -10,13 +10,15 @@
         --text: #080304;
         --background: #fdf6f7;
         --primary: #dc2852;
+        --primary-content: #fdf6f7;
         --secondary: #eb7a94;
         --accent: #f25277;
     }
     .dark {
         --text: #fcf8f9;
-        --background: #080203;
+        --background: #171b27;
         --primary: #d7234d;
+        --primary-content: #fdf6f7;
         --secondary: #85142e;
         --accent: #ab0d32;
     }
@@ -41,13 +43,7 @@
     h5 {
         @apply text-sm font-medium;
     }
-    thead,
-    dt {
-        @apply !font-bold !text-accent;
-    }
-    td,
-    dl,
-    dd {
+    label {
         @apply !text-primary;
     }
 }
