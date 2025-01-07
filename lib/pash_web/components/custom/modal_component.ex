@@ -40,7 +40,7 @@ defmodule PashWeb.Custom.ModalComponent do
     >
       <div
         id={"#{@id}-bg"}
-        class="bg-background to-70% fixed inset-0 transition-opacity"
+        class="bg-background/20 fixed inset-0 transition-opacity backdrop-blur"
         aria-hidden="true"
       />
       <div
