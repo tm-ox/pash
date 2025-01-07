@@ -5,8 +5,8 @@ defmodule PashWeb.PostLive.Show do
   def render(assigns) do
     ~H"""
     <.header>
-      Post {@post.id}
-      <:subtitle>This is a post record from your database.</:subtitle>
+      {@post.title}
+      <:subtitle>id {@post.id}</:subtitle>
 
       <:actions>
         <.link patch={~p"/blog/#{@post}/show/edit"} phx-click={JS.push_focus()}>
@@ -16,7 +16,11 @@ defmodule PashWeb.PostLive.Show do
     </.header>
 
     <.list>
-      <:item title="Id">{@post.id}</:item>
+      <:item title="Title">{@post.title}</:item>
+      <:item title="Image">
+        <img class="h-24 w-24 object-contain" src={@post.image_url} />
+      </:item>
+      <:item title="Image Alt">{@post.image_alt}</:item>
       <:item title="Content">{@post.content}</:item>
     </.list>
 

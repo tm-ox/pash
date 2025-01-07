@@ -99,6 +99,7 @@ defmodule PashWeb do
       import PashWeb.Custom.ModalComponent
       import PashWeb.Custom.ListComponent
       import PashWeb.Custom.BackComponent
+      import PashWeb.Custom.CardComponent
 
       use Gettext,
         backend: PashWeb.Gettext

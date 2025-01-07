@@ -22,13 +22,13 @@ defmodule Pash.Blog.Post do
     create :create do
       primary? true
       # accept title as input
-      accept [:title]
+      accept [:title, :image_url, :image_alt, :content]
     end
 
     update :update do
       primary? true
       # accept content as input
-      accept [:content]
+      accept [:title, :image_url, :image_alt, :content]
     end
 
     # Defines custom read action which fetches post by id.
@@ -56,5 +56,7 @@ defmodule Pash.Blog.Post do
     # Add a string type attribute called `:content`
     # If allow_nil? is not specified, then content can be nil
     attribute :content, :string
+    attribute :image_url, :string
+    attribute :image_alt, :string
   end
 end

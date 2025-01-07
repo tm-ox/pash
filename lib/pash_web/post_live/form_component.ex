@@ -7,7 +7,7 @@ defmodule PashWeb.PostLive.FormComponent do
     <div>
       <.header>
         {@title}
-        <:subtitle>Use this form to manage post records in your database.</:subtitle>
+        <%!-- <:subtitle>Use this form to manage post records in your database.</:subtitle> --%>
       </.header>
 
       <.simple_form
@@ -19,8 +19,14 @@ defmodule PashWeb.PostLive.FormComponent do
       >
         <%= if @form.source.type == :create do %>
           <.input field={@form[:title]} type="text" label="Title" />
+          <.input field={@form[:image_url]} type="text" label="Image Url" />
+          <.input field={@form[:image_alt]} type="text" label="Image Alt" />
+          <.input field={@form[:content]} type="text" label="Content" />
         <% end %>
         <%= if @form.source.type == :update do %>
+          <.input field={@form[:title]} type="text" label="Title" />
+          <.input field={@form[:image_url]} type="text" label="Image Url" />
+          <.input field={@form[:image_alt]} type="text" label="Image Alt" />
           <.input field={@form[:content]} type="text" label="Content" />
         <% end %>
 

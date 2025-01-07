@@ -21,7 +21,7 @@ defmodule PashWeb.Custom.HeaderComponent do
         <h1 class="text-lg font-semibold leading-8 text-primary">
           {render_slot(@inner_block)}
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-text">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-basecontent">
           {render_slot(@subtitle)}
         </p>
       </div>

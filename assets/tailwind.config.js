@@ -12,10 +12,10 @@ module.exports = {
     extend: {
       colors: {
         brand: "#FD4F00",
-        text: "var(--text)",
-        background: "var(--background)",
+        base: "var(--base)",
+        basecontent: "var(--basecontent)",
         primary: "var(--primary)",
-        primarycontent: "var(--primary-content)",
+        primarycontent: "var(--primarycontent)",
         secondary: "var(--secondary)",
         accent: "var(--accent)",
       },

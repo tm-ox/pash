@@ -40,7 +40,7 @@ defmodule PashWeb.Custom.ModalComponent do
     >
       <div
         id={"#{@id}-bg"}
-        class="bg-background/20 fixed inset-0 transition-opacity backdrop-blur"
+        class="bg-base/20 fixed inset-0 transition-opacity backdrop-blur"
         aria-hidden="true"
       />
       <div
@@ -58,7 +58,7 @@ defmodule PashWeb.Custom.ModalComponent do
               phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
               phx-key="escape"
               phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
-              class="shadow-zinc-700/10 ring-zinc-700/10 relative hidden rounded-2xl bg-background p-14 shadow-lg ring-1 transition"
+              class="shadow-basecontent/10 ring-basecontent/10 relative hidden rounded-2xl bg-base p-14 shadow-lg ring-1 transition"
             >
               <div class="absolute top-6 right-5">
                 <button

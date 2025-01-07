@@ -4,40 +4,59 @@ defmodule PashWeb.PostLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <.header>
-      Listing blog
-      <:actions>
-        <.link patch={~p"/blog/new"}>
-          <.button>New Post</.button>
-        </.link>
-      </:actions>
-    </.header>
+    <section>
+      <div class="flex gap-4">
+        <%= for {_id, post} <- @streams.blog do %>
+          <.card
+            image={post.image_url}
+            image_alt={post.image_alt}
+            description={post.content}
+            description_title={post.title}
+          />
+        <% end %>
+      </div>
+    </section>
 
-    <.table
-      id="blog"
-      rows={@streams.blog}
-      row_click={fn {_id, post} -> JS.navigate(~p"/blog/#{post}") end}
-    >
-      <:col :let={{_id, post}} label="Id">{post.id}</:col>
-      <:col :let={{_id, post}} label="Content">{post.content}</:col>
+    <section>
+      <.header>
+        Listing blog
+        <:actions>
+          <.link patch={~p"/blog/new"}>
+            <.button>New Post</.button>
+          </.link>
+        </:actions>
+      </.header>
 
-      <:action :let={{_id, post}}>
-        <div class="sr-only">
-          <.link navigate={~p"/blog/#{post}"}>Show</.link>
-        </div>
+      <.table
+        id="blog"
+        rows={@streams.blog}
+        row_click={fn {_id, post} -> JS.navigate(~p"/blog/#{post}") end}
+      >
+        <:col :let={{_id, post}} label="Title">{post.title}</:col>
+        <:col :let={{_id, post}} label="Image">
+          <img class="h-8 w-8 object-contain" src={post.image_url} />
+        </:col>
+        <:col :let={{_id, post}} label="Image Alt">{post.image_alt}</:col>
+        <:col :let={{_id, post}} label="Content">{post.content}</:col>
 
-        <.link patch={~p"/blog/#{post}/edit"}>Edit</.link>
-      </:action>
+        <:action :let={{_id, post}}>
+          <div class="sr-only">
+            <.link navigate={~p"/blog/#{post}"}>Show</.link>
+          </div>
 
-      <:action :let={{id, post}}>
-        <.link
-          phx-click={JS.push("delete", value: %{id: post.id}) |> hide("##{id}")}
-          data-confirm="Are you sure?"
-        >
-          Delete
-        </.link>
-      </:action>
-    </.table>
+          <.link patch={~p"/blog/#{post}/edit"}>Edit</.link>
+        </:action>
+
+        <:action :let={{id, post}}>
+          <.link
+            phx-click={JS.push("delete", value: %{id: post.id}) |> hide("##{id}")}
+            data-confirm="Are you sure?"
+          >
+            Delete
+          </.link>
+        </:action>
+      </.table>
+    </section>
 
     <.modal
       :if={@live_action in [:new, :edit]}

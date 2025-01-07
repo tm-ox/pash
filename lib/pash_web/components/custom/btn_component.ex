@@ -27,5 +27,5 @@ defmodule PashWeb.Custom.BtnComponent do
     """
   end
 
-  defp color(:default), do: "bg-primary hover:bg-accent text-text focus:ring-accent"
+  defp color(:default), do: "bg-primary hover:bg-accent text-basecontent focus:ring-accent"
 end

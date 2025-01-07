@@ -25,7 +25,7 @@ defmodule PashWeb.Custom.ListComponent do
       <dl class="-my-4 divide-y divide-accent">
         <div :for={item <- @item} class="flex gap-4 py-4 text-sm leading-6 sm:gap-8">
           <dt class="w-1/4 flex-none text-primary">{item.title}</dt>
-          <dd class="text-text">{render_slot(item)}</dd>
+          <dd class="text-basecontent">{render_slot(item)}</dd>
         </div>
       </dl>
     </div>

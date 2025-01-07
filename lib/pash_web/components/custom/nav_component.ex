@@ -26,13 +26,13 @@ defmodule PashWeb.NavComponent do
     </nav>
     <div
       id={"#{@id}-bg"}
-      class="fixed inset-0 bg-background/20 backdrop-blur transition-opacity hidden z-10"
+      class="fixed inset-0 bg-base/20 backdrop-blur transition-opacity hidden"
       aria-hidden="true"
       phx-click={hide_navbar(@id)}
     />
     <div
       id={"#{@id}-container"}
-      class="fixed inset-y-0 right-0 px-4 lg:px-0 lg:right-12 w-full lg:w-80 hidden z-10 box-border"
+      class="fixed inset-y-0 right-0 px-4 lg:px-0 lg:right-12 w-full lg:w-80 hidden bg-base"
     >
       <div class="flex flex-col py-16 h-full">
         <div class="absolute top-2">
@@ -43,7 +43,7 @@ defmodule PashWeb.NavComponent do
         </div>
         <aside
           id={@id}
-          class="flex flex-1 flex-col overflow-y-auto border border-primary rounded h-fit"
+          class="flex flex-1 flex-col overflow-y-auto bg-base border border-primary box-border shadow-basecontent/10 ring-basecontent/10 rounded h-fit"
         >
           <.sidebar_nav active_tab={@active_tab} tabs={@tabs} />
         </aside>
@@ -84,7 +84,7 @@ defmodule PashWeb.NavComponent do
             {render_slot(@brand_block)}
           </div>
           <.sidebar_nav active_tab={@active_tab} tabs={@tabs} />
-          <div class="flex flex-grow w-full py-4 bg-background border-b border-primary justify-center">
+          <div class="flex flex-grow w-full py-4 bg-base border-b border-primary justify-center">
             <.theme id="theme" />
           </div>
         </aside>
@@ -175,7 +175,7 @@ defmodule PashWeb.NavComponent do
 
     ~H"""
     <div class={[
-      "flex tabs-center px-1 py-2 text-primary border-b border-primary hover:border-b hover:border-accent hover:text-accent bg-background",
+      "flex tabs-center px-1 py-2 text-primary border-b border-primary hover:border-b hover:border-accent hover:text-accent bg-base",
       @active && "!text-accent border-b !border-accent"
     ]}>
       <.link

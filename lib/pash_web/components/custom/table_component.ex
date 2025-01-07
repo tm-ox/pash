@@ -50,9 +50,9 @@ defmodule PashWeb.Custom.TableComponent do
         <tbody
           id={@id}
           phx-update={match?(%Phoenix.LiveView.LiveStream{}, @rows) && "stream"}
-          class="relative divide-y divide-zinc-100 border-t border-accent text-sm leading-6 text-text"
+          class="relative divide-y divide-primary border-t border-accent text-sm leading-6 text-basecontent"
         >
-          <tr :for={row <- @rows} id={@row_id && @row_id.(row)} class="group hover:bg-accent">
+          <tr :for={row <- @rows} id={@row_id && @row_id.(row)} class="group">
             <td
               :for={{col, i} <- Enum.with_index(@col)}
               phx-click={@row_click && @row_click.(row)}
@@ -60,17 +60,17 @@ defmodule PashWeb.Custom.TableComponent do
             >
               <div class="block py-4 pr-6">
                 <span class="absolute -inset-y-px right-0 -left-4 group-hover:bg-secondary sm:rounded-l" />
-                <span class={["relative", i == 0 && "font-semibold text-text"]}>
+                <span class={["relative", i == 0 && "font-semibold text-basecontent"]}>
                   {render_slot(col, @row_item.(row))}
                 </span>
               </div>
             </td>
             <td :if={@action != []} class="relative w-14 p-0">
               <div class="relative whitespace-nowrap py-4 text-right text-sm font-medium">
-                <span class="absolute -inset-y-px -right-4 left-0 group-hover:bg-secondary sm:rounded-r" />
+                <span class="absolute -inset-y-px -right-4 left-0  sm:rounded-r" />
                 <span
                   :for={action <- @action}
-                  class="relative ml-4 font-semibold leading-6 text-text hover:text-accent"
+                  class="relative ml-4 font-semibold leading-6 text-basecontent hover:text-accent"
                 >
                   {render_slot(action, @row_item.(row))}
                 </span>

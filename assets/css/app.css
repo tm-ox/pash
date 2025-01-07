@@ -7,26 +7,26 @@
 /* This file is for your main application CSS */
 @layer base {
     :root {
-        --text: #080304;
-        --background: #fdf6f7;
+        --base: #fdf6f7;
+        --basecontent: #080304;
         --primary: #dc2852;
-        --primary-content: #fdf6f7;
+        --primarycontent: #fdf6f7;
         --secondary: #eb7a94;
         --accent: #f25277;
     }
     .dark {
-        --text: #fcf8f9;
-        --background: #171b27;
+        --base: #171b27;
+        --basecontent: #fcf8f9;
         --primary: #d7234d;
-        --primary-content: #fdf6f7;
+        --primarycontent: #fdf6f7;
         --secondary: #85142e;
         --accent: #ab0d32;
     }
     body {
-        @apply bg-background font-brand text-text tracking-wide;
+        @apply bg-base font-brand text-basecontent tracking-wide;
     }
     header {
-        @apply fixed top-0 flex w-full h-fit site-padding;
+        @apply fixed top-0 flex w-full h-fit site-padding bg-base z-50;
     }
     nav {
         @apply border-b border-primary;
@@ -34,14 +34,17 @@
     main {
         @apply flex flex-col flex-grow mt-24 site-padding;
     }
+    section {
+        @apply mb-12;
+    }
     h1 {
         @apply text-3xl sm:text-4xl font-bold text-primary tracking-wide;
     }
     h4 {
-        @apply text-lg font-bold;
+        @apply text-lg font-bold text-primary;
     }
     h5 {
-        @apply text-sm font-medium;
+        @apply text-sm font-medium text-primary;
     }
     label {
         @apply !text-primary;
