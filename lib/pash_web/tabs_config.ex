@@ -24,35 +24,35 @@ defmodule PashWeb.TabsConfig do
         tab: :home,
         options: [navigate: ~p"/"]
       },
-      %{
-        label: gettext("Blog"),
-        icon: "hero-paper-clip",
-        tab: :home,
-        options: [navigate: ~p"/blog"]
-      }
+      # %{
+      #   label: gettext("Blog"),
+      #   icon: "hero-paper-clip",
+      #   tab: :blog,
+      #   options: [navigate: ~p"/blog"]
+      # },
       # %{
       #   label: gettext("Storybook"),
       #   icon: "hero-book-open-solid",
       #   tab: :storybook,
       #   options: [navigate: ~p"/storybook"]
       # },
-      # %{
-      #   label: gettext("Inventory"),
-      #   icon: "hero-inbox-stack-solid",
-      #   tab: :inventory,
-      #   tabs: [
-      #     %{
-      #       label: gettext("Products"),
-      #       tab: :products,
-      #       options: [navigate: ~p"/products"]
-      #     },
-      #     %{
-      #       label: gettext("Stock"),
-      #       tab: :stock,
-      #       options: %{navigate: ~p"/stock"}
-      #     }
-      #   ]
-      # },
+      %{
+        label: gettext("Blog"),
+        icon: "hero-paper-clip",
+        tab: :inventory,
+        tabs: [
+          %{
+            label: gettext("View"),
+            tab: :blog,
+            options: [navigate: ~p"/blog"]
+          },
+          %{
+            label: gettext("Edit"),
+            tab: :edit,
+            options: %{navigate: ~p"/blog/edit"}
+          }
+        ]
+      }
       # %{
       #   label: gettext("Clients"),
       #   icon: "hero-user-solid",

@@ -26,6 +26,7 @@ defmodule PashWeb.Router do
       # get "/", PageController, :home
       # Blog
       live "/blog", PostLive.Index, :index
+      live "/blog/edit", PostLive.Edit, :index
       live "/blog/new", PostLive.Index, :new
       live "/blog/:id/edit", PostLive.Index, :edit
       live "/blog/:id", PostLive.Show, :show
