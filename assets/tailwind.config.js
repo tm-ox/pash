@@ -6,7 +6,12 @@ const fs = require("fs");
 const path = require("path");
 
 module.exports = {
-  content: ["./js/**/*.js", "../lib/pash_web.ex", "../lib/pash_web/**/*.*ex"],
+  content: [
+    "./js/**/*.js",
+    "../lib/pash_web.ex",
+    "../lib/pash_web/**/*.*ex",
+    "../deps/ash_authentication_phoenix/**/*.*ex",
+  ],
   darkMode: "class",
   theme: {
     extend: {

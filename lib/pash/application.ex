@@ -17,7 +17,8 @@ defmodule Pash.Application do
       # {Pash.Worker, arg},
       # Start to serve requests, typically the last entry
       PashWeb.Endpoint,
-      Pash.Repo
+      Pash.Repo,
+      {AshAuthentication.Supervisor, [otp_app: :pash]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

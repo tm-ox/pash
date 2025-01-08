@@ -1,5 +1,7 @@
 import Config
 
+config :pash, token_signing_secret: "qLMqw8oXh5a2N6MZ/hADT+S4FFUg/mAa"
+
 config :pash, Pash.Repo,
   database: Path.join(__DIR__, "../path/to/your#{System.get_env("MIX_TEST_PARTITION")}.db"),
   pool_size: 10

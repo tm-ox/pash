@@ -7,7 +7,7 @@
 # General application configuration
 import Config
 
-config :pash, :ash_domains, [Pash.Blog, Pash.Support]
+config :pash, :ash_domains, [Pash.Blog, Pash.Support, Pash.Accounts]
 
 config :pash,
   ash_apis: [Pash.Support]
@@ -34,6 +34,8 @@ config :spark,
     remove_parens?: true,
     "Ash.Resource": [
       section_order: [
+        :authentication,
+        :tokens,
         :resource,
         :code_interface,
         :actions,

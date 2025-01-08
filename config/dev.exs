@@ -58,7 +58,7 @@ config :pash, PashWeb.Endpoint,
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :pash, dev_routes: true
+config :pash, dev_routes: true, token_signing_secret: "wc/A5y0EEQgqJswA5ys45/HA5NB2Klg5"
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
