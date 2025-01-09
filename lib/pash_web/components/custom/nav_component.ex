@@ -157,7 +157,7 @@ defmodule PashWeb.NavComponent do
     </.sidebar_group>
 
     <div :if={@item[:separator]} class="py-2">
-      <div class="border-b"></div>
+      <div class="border-primary border-b"></div>
     </div>
     """
   end

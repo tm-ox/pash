@@ -58,8 +58,8 @@ defmodule PashWeb.TabsConfig do
         icon: "hero-user-solid",
         tab: :clients,
         options: [navigate: ~p"/sign-in"],
-        separator: true,
-        badge: 1
+        separator: true
+        # badge: 1
       }
       # %{
       #   label: gettext("Config"),
