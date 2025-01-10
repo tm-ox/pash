@@ -1,4 +1,4 @@
-defmodule PashWeb.AdminLive do
+defmodule PashWeb.HomeLive do
   use PashWeb, :live_view
 
   @impl true
@@ -9,7 +9,7 @@ defmodule PashWeb.AdminLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <h1>Admin</h1>
+    <h1>Home page</h1>
     """
   end
 end

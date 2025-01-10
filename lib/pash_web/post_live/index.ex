@@ -5,7 +5,7 @@ defmodule PashWeb.PostLive.Index do
   def render(assigns) do
     ~H"""
     <h1>Blog</h1>
-    <div class="flex gap-4">
+    <div class="col-layout">
       <%= for {_id, post} <- @streams.blog do %>
         <.card
           image={post.image_url}

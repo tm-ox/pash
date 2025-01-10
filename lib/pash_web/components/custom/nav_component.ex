@@ -5,6 +5,7 @@ defmodule PashWeb.NavComponent do
   use Gettext, backend: PashWeb.Gettext
 
   import PashWeb.CoreComponents, only: [icon: 1]
+  alias Ash.Test
   alias Phoenix.LiveView.JS
 
   attr :id, :string, default: "navbar"
