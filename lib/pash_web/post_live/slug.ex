@@ -1,4 +1,4 @@
-defmodule PashWeb.PostLive.Show do
+defmodule PashWeb.PostLive.Slug do
   use PashWeb, :live_view
 
   @impl true
@@ -6,13 +6,13 @@ defmodule PashWeb.PostLive.Show do
     ~H"""
     <.header>
       {@post.title}
-      <:subtitle>id {@post.id}</:subtitle>
+      <%!-- <:subtitle>id {@post.id}</:subtitle>
 
       <:actions>
         <.link patch={~p"/blog/#{@post}/show/edit"} phx-click={JS.push_focus()}>
           <.button>Edit post</.button>
         </.link>
-      </:actions>
+      </:actions> --%>
     </.header>
 
     <.list>
@@ -24,13 +24,13 @@ defmodule PashWeb.PostLive.Show do
       <:item title="Content">{@post.content}</:item>
     </.list>
 
-    <.back navigate={~p"/blog/manage"}>Back to posts</.back>
+    <.back navigate={~p"/blog"}>Back to posts</.back>
 
     <.modal
       :if={@live_action == :edit}
       id="post-modal"
       modal_show
-      on_cancel={JS.patch(~p"/blog/show/#{@post}")}
+      on_cancel={JS.patch(~p"/blog/#{@post}")}
     >
       <.live_component
         module={PashWeb.PostLive.FormComponent}
@@ -38,7 +38,7 @@ defmodule PashWeb.PostLive.Show do
         title={@page_title}
         action={@live_action}
         post={@post}
-        patch={~p"/blog/show/#{@post}"}
+        patch={~p"/blog/#{@post}"}
       />
     </.modal>
     """
@@ -47,7 +47,7 @@ defmodule PashWeb.PostLive.Show do
   @impl true
   def mount(_params, _session, socket) do
     # socket = assign(socket, page_title: "{post.tile}")
-    {:ok, socket, layout: {PashWeb.Layouts, :admin}}
+    {:ok, socket}
   end
 
   @impl true
