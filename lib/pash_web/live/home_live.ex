@@ -10,6 +10,9 @@ defmodule PashWeb.HomeLive do
   def render(assigns) do
     ~H"""
     <h1>Home page</h1>
+    <%= if @current_user do %>
+      test
+    <% end %>
     """
   end
 end

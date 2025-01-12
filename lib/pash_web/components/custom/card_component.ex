@@ -18,10 +18,15 @@ defmodule PashWeb.Custom.CardComponent do
     default: [],
     doc: "cards actions, such as `add to favourite`, `dislike`, `share` etc."
 
+  attr :link, :string, default: "", doc: "card link"
+
   @spec card(Plug.Conn.t()) :: Phoenix.LiveView.Rendered.t()
   def card(assigns) do
     ~H"""
-    <div class="shadow-basecontent/10 ring-basecontent/10 rounded-2xl bg-base px-4 py-8 shadow-lg space-y-4">
+    <.link
+      navigate={@link}
+      class="shadow-basecontent/10 ring-basecontent/10 rounded-2xl bg-base px-4 py-8 shadow-lg space-y-4"
+    >
       <img class="object-cover rounded-lg rounded-b-sm" src={@image} alt={@image_alt} />
       <div class="space-y-1">
         <h4>{@description_title}</h4>
@@ -35,7 +40,7 @@ defmodule PashWeb.Custom.CardComponent do
           </p>
         </div>
       </div>
-    </div>
+    </.link>
     """
   end
 

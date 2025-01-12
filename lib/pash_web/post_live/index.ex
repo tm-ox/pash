@@ -8,6 +8,7 @@ defmodule PashWeb.PostLive.Index do
     <div class="col-layout">
       <%= for {_id, post} <- @streams.blog do %>
         <.card
+          link={~p"/blog/#{post}"}
           image={post.image_url}
           image_alt={post.image_alt}
           description={post.content}
@@ -20,6 +21,7 @@ defmodule PashWeb.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    socket = assign(socket, page_title: "Blog")
     {:ok, stream(socket, :blog, Ash.read!(Pash.Blog.Post))}
   end
 

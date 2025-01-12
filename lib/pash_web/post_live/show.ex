@@ -46,6 +46,7 @@ defmodule PashWeb.PostLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
+    # socket = assign(socket, page_title: "{post.tile}")
     {:ok, socket}
   end
 

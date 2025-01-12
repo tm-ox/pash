@@ -3,7 +3,8 @@ defmodule PashWeb.AdminLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    socket = assign(socket, page_title: "Admin")
+    {:ok, socket, layout: {PashWeb.Layouts, :admin}}
   end
 
   @impl true

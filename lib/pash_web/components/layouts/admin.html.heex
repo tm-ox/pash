@@ -1,0 +1,13 @@
+<div class="flex flex-col min-h-screen">
+  <header>
+    <PashWeb.NavComponent.sidebar active_tab={@active_tab} tabs={@tabs}>
+      <:brand_block>
+        <PashWeb.Custom.BrandComponent.brand />
+      </:brand_block>
+    </PashWeb.NavComponent.sidebar>
+  </header>
+  <main class="ml-0 sm:ml-56 mt-16 sm:mt-4">
+    <.flash_group flash={@flash} />
+    {@inner_content}
+  </main>
+</div>
