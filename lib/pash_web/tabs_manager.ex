@@ -2,6 +2,7 @@ defmodule PashWeb.TabManager do
   @moduledoc false
 
   import PashWeb.TabsConfig, only: [view_groups: 0, tabs_config: 0]
+  import PashWeb.TabsAdminConfig, only: [view_admin_groups: 0, tabs_admin_config: 0]
   import Phoenix.Component, only: [assign_new: 3, assign: 2]
   import Phoenix.LiveView, only: [attach_hook: 4]
 
@@ -9,6 +10,7 @@ defmodule PashWeb.TabManager do
     new_socket =
       socket
       |> assign_new(:tabs, fn -> tabs_config() end)
+      |> assign_new(:tabs_admin, fn -> tabs_admin_config() end)
       |> attach_hook(:active_tab, :handle_params, &set_active_tab/3)
 
     {:cont, new_socket}

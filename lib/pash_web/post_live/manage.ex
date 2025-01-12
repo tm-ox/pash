@@ -1,11 +1,11 @@
-defmodule PashWeb.PostLive.Edit do
+defmodule PashWeb.PostLive.Manage do
   use PashWeb, :live_view
 
   @impl true
   def render(assigns) do
     ~H"""
     <.header>
-      Listing blog
+      <h1>Listing blog</h1>
       <:actions>
         <.link patch={~p"/blog/new"}>
           <.button>New Post</.button>
@@ -16,7 +16,7 @@ defmodule PashWeb.PostLive.Edit do
     <.table
       id="blog"
       rows={@streams.blog}
-      row_click={fn {_id, post} -> JS.navigate(~p"/blog/#{post}") end}
+      row_click={fn {_id, post} -> JS.navigate(~p"/blog/show/#{post}") end}
     >
       <:col :let={{_id, post}} label="Title">{post.title}</:col>
       <:col :let={{_id, post}} label="Image">
@@ -30,7 +30,7 @@ defmodule PashWeb.PostLive.Edit do
           <.link navigate={~p"/blog/#{post}"}>Show</.link>
         </div>
 
-        <.link patch={~p"/blog/#{post}/edit"}>Edit</.link>
+        <.link patch={~p"/blog/#{post}/show/edit"}>Edit</.link>
       </:action>
 
       <:action :let={{id, post}}>
@@ -47,7 +47,7 @@ defmodule PashWeb.PostLive.Edit do
       :if={@live_action in [:new, :edit]}
       id="post-modal"
       modal_show
-      on_cancel={JS.patch(~p"/blog")}
+      on_cancel={JS.patch(~p"/blog/manage")}
     >
       <.live_component
         module={PashWeb.PostLive.FormComponent}
@@ -55,7 +55,7 @@ defmodule PashWeb.PostLive.Edit do
         title={@page_title}
         action={@live_action}
         post={@post}
-        patch={~p"/blog"}
+        patch={~p"/blog/manage"}
       />
     </.modal>
     """
@@ -63,7 +63,7 @@ defmodule PashWeb.PostLive.Edit do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :blog, Ash.read!(Pash.Blog.Post))}
+    {:ok, stream(socket, :blog, Ash.read!(Pash.Blog.Post)), layout: {PashWeb.Layouts, :admin}}
   end
 
   @impl true
