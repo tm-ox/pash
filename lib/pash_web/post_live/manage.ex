@@ -5,7 +5,7 @@ defmodule PashWeb.PostLive.Manage do
   def render(assigns) do
     ~H"""
     <.header>
-      <h1>Listing blog</h1>
+      <h1>Manage blog</h1>
       <:actions>
         <.link patch={~p"/blog/new"}>
           <.button>New Post</.button>

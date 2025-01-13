@@ -28,6 +28,13 @@ defmodule PashWeb.Router do
     ash_authentication_live_session :authentication_required,
       on_mount: [{PashWeb.LiveUserAuth, :live_user_required}, PashWeb.TabManager] do
       live "/admin", AdminLive.Index, :index
+      # Blog
+      live "/blog/manage", PostLive.Manage, :index
+      live "/blog/new", PostLive.Manage, :new
+      live "/blog/:id", PostLive.Slug, :show
+      live "/blog/show/:id", PostLive.Show, :show
+      # live "/blog/:id/edit", PostLive.Show, :edit
+      live "/blog/:id/show/edit", PostLive.Show, :edit
     end
 
     ash_authentication_live_session :authentication_optional,
@@ -35,12 +42,6 @@ defmodule PashWeb.Router do
       live "/", HomeLive, :index
       # Blog
       live "/blog", PostLive.Index, :index
-      live "/blog/manage", PostLive.Manage, :index
-      live "/blog/new", PostLive.Manage, :new
-      live "/blog/:id", PostLive.Slug, :show
-      live "/blog/show/:id", PostLive.Show, :show
-      # live "/blog/:id/edit", PostLive.Show, :edit
-      live "/blog/:id/show/edit", PostLive.Show, :edit
     end
 
     auth_routes AuthController, Pash.Accounts.User, path: "/auth"

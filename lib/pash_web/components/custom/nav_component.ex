@@ -76,7 +76,7 @@ defmodule PashWeb.NavComponent do
       id={"#{@id}-container"}
       class="fixed inset-y-0 left-0 w-60 h-full max-lg:hidden z-10 border border-primary"
     >
-      <div class="flex min-h-0 flex-col">
+      <div class="flex min-h-0 h-full flex-col">
         <aside id={@id} class="flex flex-1 flex-col h-full overflow-y-auto">
           <div class="absolute top-2 right-5 lg:hidden">
             <.close_button id={@id} click={hide_sidebar(@id)} />
@@ -85,7 +85,7 @@ defmodule PashWeb.NavComponent do
             {render_slot(@brand_block)}
           </div>
           <.sidebar_nav active_tab={@active_tab} tabs={@tabs} />
-          <div class="flex flex-grow w-full py-4 bg-base border-b border-primary justify-center">
+          <div class="flex flex-grow w-full px-4 py-2 bg-base border-t border-primary mt-auto">
             <.theme id="theme" />
           </div>
         </aside>
@@ -135,7 +135,7 @@ defmodule PashWeb.NavComponent do
 
   defp sidebar_nav(assigns) do
     ~H"""
-    <div class="flex flex-col h-full">
+    <div class="flex flex-col h-full mn-auto">
       <.sidebar_menu_item :for={item <- @tabs} active_tab={@active_tab} item={item} />
     </div>
     """
